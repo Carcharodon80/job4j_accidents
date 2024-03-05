@@ -44,11 +44,11 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="instance : ${accidents}">
-            <td th:text="${instance.key}"></td>
-            <td th:text="${instance.value.name}"></td>
-            <td th:text="${instance.value.text}"></td>
-            <td th:text="${instance.value.address}"></td>
+        <tr th:each="accident : ${accidents}">
+            <td th:text="${accident.id}"></td>
+            <td th:text="${accident.name}"></td>
+            <td th:text="${accident.text}"></td>
+            <td th:text="${accident.address}"></td>
         </tr>
         </tbody>
     </table>

@@ -5,14 +5,14 @@ import org.springframework.stereotype.Service;
 import ru.job4j.accidents.model.Accident;
 import ru.job4j.accidents.repository.AccidentMem;
 
-import java.util.Map;
+import java.util.List;
 
 @Service
 @AllArgsConstructor
 public class AccidentService {
     private final AccidentMem accidentMem;
 
-    public Map<Integer, Accident> findAllAccidents() {
-        return accidentMem.getAllAccidents();
+    public List<Accident> findAllAccidents() {
+        return accidentMem.findAllAccidents();
     }
 }
