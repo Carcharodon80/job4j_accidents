@@ -18,13 +18,19 @@ public class AccidentMem {
 
     public AccidentMem() {
         for (int i = 0; i < 5; i++) {
-            addAccident();
+            addNewAccident();
         }
     }
 
-    public synchronized void addAccident() {
+    public synchronized void addNewAccident() {
         accidents.put(maxID.get(), new Accident(maxID.get(), "Name" + maxID, "Text" + maxID, "Address" + maxID));
         maxID.incrementAndGet();
+    }
+
+    public synchronized void addAccident(Accident accident) {
+        accident.setId(getMaxID().get());
+        maxID.incrementAndGet();
+        accidents.put(accident.getId(), accident);
     }
 
     public List<Accident> findAllAccidents() {

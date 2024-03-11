@@ -15,4 +15,8 @@ public class AccidentService {
     public List<Accident> findAllAccidents() {
         return accidentMem.findAllAccidents();
     }
+
+    public synchronized void create(Accident accident) {
+        accidentMem.addAccident(accident);
+    }
 }
