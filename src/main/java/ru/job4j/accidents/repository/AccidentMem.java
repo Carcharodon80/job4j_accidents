@@ -7,6 +7,7 @@ import ru.job4j.accidents.model.Accident;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -18,22 +19,25 @@ public class AccidentMem {
 
     public AccidentMem() {
         for (int i = 0; i < 5; i++) {
-            addNewAccident();
+            addAccident(new Accident(i, "Name" + i, "Text" + i, "Address" + i));
         }
     }
 
-    public synchronized void addNewAccident() {
-        accidents.put(maxID.get(), new Accident(maxID.get(), "Name" + maxID, "Text" + maxID, "Address" + maxID));
-        maxID.incrementAndGet();
-    }
-
-    public synchronized void addAccident(Accident accident) {
+    public void addAccident(Accident accident) {
         accident.setId(getMaxID().get());
         maxID.incrementAndGet();
         accidents.put(accident.getId(), accident);
     }
 
+    public synchronized void updateAccident(Accident accident) {
+        accidents.put(accident.getId(), accident);
+    }
+
     public List<Accident> findAllAccidents() {
         return new ArrayList<>(accidents.values());
+    }
+
+    public Optional<Accident> findById(int id) {
+        return Optional.ofNullable(accidents.get(id));
     }
 }
