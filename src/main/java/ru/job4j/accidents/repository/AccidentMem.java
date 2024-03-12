@@ -29,7 +29,7 @@ public class AccidentMem {
         accidents.put(accident.getId(), accident);
     }
 
-    public synchronized void updateAccident(Accident accident) {
+    public void updateAccident(Accident accident) {
         accidents.put(accident.getId(), accident);
     }
 

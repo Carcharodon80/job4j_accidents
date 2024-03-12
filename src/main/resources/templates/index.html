@@ -19,7 +19,7 @@
 </head>
 <body>
 <div class="container">
-    <nav class = "navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
                 <a class="nav-item nav-link" href="#">Главная</a>
@@ -41,7 +41,11 @@
         </thead>
         <tbody>
         <tr th:each="accident : ${accidents}">
-            <td th:text="${accident.id}"></td>
+            <td>
+                <a th:href="@{|/formUpdateAccident?id=${accident.id}|}">
+                    <span th:text="${accident.id}"/>
+                </a>
+            </td>
             <td th:text="${accident.name}"></td>
             <td th:text="${accident.text}"></td>
             <td th:text="${accident.address}"></td>

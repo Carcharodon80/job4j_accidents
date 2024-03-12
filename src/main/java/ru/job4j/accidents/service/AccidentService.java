@@ -16,7 +16,15 @@ public class AccidentService {
         return accidentMem.findAllAccidents();
     }
 
+    public Accident findById(int id) {
+        return accidentMem.findById(id).orElseThrow();
+    }
+
     public synchronized void create(Accident accident) {
         accidentMem.addAccident(accident);
+    }
+
+    public synchronized void update(Accident accident) {
+        accidentMem.updateAccident(accident);
     }
 }
