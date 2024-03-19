@@ -10,3 +10,5 @@ public class Main {
         System.out.println("http://localhost:8080/");
     }
 }
+
+//todo проверить навигацию по страницам

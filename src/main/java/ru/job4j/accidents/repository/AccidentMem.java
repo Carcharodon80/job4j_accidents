@@ -3,6 +3,7 @@ package ru.job4j.accidents.repository;
 import lombok.Getter;
 import org.springframework.stereotype.Repository;
 import ru.job4j.accidents.model.Accident;
+import ru.job4j.accidents.model.AccidentType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +20,7 @@ public class AccidentMem {
 
     public AccidentMem() {
         for (int i = 0; i < 5; i++) {
-            addAccident(new Accident(i, "Name" + i, "Text" + i, "Address" + i));
+            addAccident(new Accident(i, "Name" + i, "Text" + i, "Address" + i, new AccidentType()));
         }
     }
 

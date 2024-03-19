@@ -22,7 +22,7 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-                <a class="nav-item nav-link" href="#">Главная</a>
+                <a class="nav-item nav-link" href="/">Главная</a>
                 <a class="nav-item nav-link" th:href="@{/accidents}">Инциденты</a>
                 <a class="nav-item nav-link active" th:href="@{/createAccident}">Добавить Инцидент</a>
             </div>
@@ -37,6 +37,7 @@
             <th scope="col">Name</th>
             <th scope="col">Text</th>
             <th scope="col">Address</th>
+            <th scope="col">Тип</th>
         </tr>
         </thead>
         <tbody>
@@ -49,6 +50,7 @@
             <td th:text="${accident.name}"></td>
             <td th:text="${accident.text}"></td>
             <td th:text="${accident.address}"></td>
+            <td th:text="${accident.type.name}"></td>
         </tr>
         </tbody>
     </table>
