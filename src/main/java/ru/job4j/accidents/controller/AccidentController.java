@@ -7,15 +7,17 @@ import org.springframework.web.bind.annotation.*;
 import ru.job4j.accidents.model.Accident;
 import ru.job4j.accidents.service.AccidentService;
 
+import java.util.Optional;
+
 @Controller
 @AllArgsConstructor
 public class AccidentController {
-    private final AccidentService accidents;
+    private final AccidentService accidentService;
 
     @GetMapping("/accidents")
     public String accidents(Model model) {
         model.addAttribute("user", "Petr Arsentev");
-        model.addAttribute("accidents", accidents.findAllAccidents());
+        model.addAttribute("accidents", accidentService.findAllAccidents());
         return "index";
     }
 
@@ -26,19 +28,29 @@ public class AccidentController {
 
     @PostMapping("/saveAccident")
     public String save(@ModelAttribute Accident accident) {
-        accidents.create(accident);
+        accidentService.create(accident);
         return "redirect:/";
     }
 
     @GetMapping("/formUpdateAccident")
     public String viewEditAccident(@RequestParam("id") int id, Model model) {
-        model.addAttribute("accident", accidents.findById(id));
-        return "editAccident";
+        Optional<Accident> optionalAccident = accidentService.findById(id);
+        if (optionalAccident.isPresent()) {
+            model.addAttribute("accident", optionalAccident.get());
+            return "editAccident";
+        } else {
+            model.addAttribute("textMessage", "Инцидент не найден, попробуйте позднее");
+            return "message";
+        }
     }
 
     @PostMapping("/updateAccident")
-    public String updateAccident(@ModelAttribute Accident accident) {
-        accidents.update(accident);
+    public String updateAccident(@ModelAttribute Accident accident, Model model) {
+        Optional<Accident> optionalAccident = accidentService.update(accident);
+        if (optionalAccident.isEmpty()) {
+            model.addAttribute("textMessage", "Ошибка при обновлении, попробуйте позднее.");
+            return "message";
+        }
         return "redirect:/";
     }
 }

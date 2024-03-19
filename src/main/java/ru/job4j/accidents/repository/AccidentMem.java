@@ -29,8 +29,8 @@ public class AccidentMem {
         accidents.put(accident.getId(), accident);
     }
 
-    public void updateAccident(Accident accident) {
-        accidents.put(accident.getId(), accident);
+    public Optional<Accident> updateAccident(Accident accident) {
+        return Optional.ofNullable(accidents.computeIfPresent(accident.getId(), (key, value) -> value = accident));
     }
 
     public List<Accident> findAllAccidents() {
