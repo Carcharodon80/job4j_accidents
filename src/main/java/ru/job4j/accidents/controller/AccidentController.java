@@ -38,16 +38,15 @@ public class AccidentController {
         if (optionalAccident.isPresent()) {
             model.addAttribute("accident", optionalAccident.get());
             return "editAccident";
-        } else {
-            model.addAttribute("textMessage", "Инцидент не найден, попробуйте позднее");
-            return "message";
         }
+        model.addAttribute("textMessage", "Инцидент не найден, попробуйте позднее");
+        return "message";
+
     }
 
     @PostMapping("/updateAccident")
     public String updateAccident(@ModelAttribute Accident accident, Model model) {
-        Optional<Accident> optionalAccident = accidentService.update(accident);
-        if (optionalAccident.isEmpty()) {
+        if (!accidentService.update(accident)) {
             model.addAttribute("textMessage", "Ошибка при обновлении, попробуйте позднее.");
             return "message";
         }

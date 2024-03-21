@@ -25,7 +25,7 @@ public class AccidentService {
         accidentMem.addAccident(accident);
     }
 
-    public Optional<Accident> update(Accident accident) {
+    public boolean update(Accident accident) {
         return accidentMem.updateAccident(accident);
     }
 }
