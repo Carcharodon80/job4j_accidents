@@ -44,16 +44,16 @@ public class AccidentController {
     @GetMapping("/formUpdateAccident")
     public String viewEditAccident(@RequestParam("id") int id, Model model) {
         Optional<Accident> optionalAccident = accidentService.findById(id);
-        if (optionalAccident.isPresent()) {
-            model.addAttribute("accident", optionalAccident.get());
-            return "editAccident";
+        if (optionalAccident.isEmpty()) {
+            model.addAttribute("textMessage", "Инцидент не найден, попробуйте позднее");
+            return "message";
         }
-        model.addAttribute("textMessage", "Инцидент не найден, попробуйте позднее");
+        model.addAttribute("accident", optionalAccident.get());
         model.addAttribute("types", types);
-        return "message";
-
+        return "editAccident";
     }
 
+    @PostMapping("/updateAccident")
     public String updateAccident(@ModelAttribute Accident accident, Model model) {
         AccidentType type = types.get(accident.getType().getId());
         accident.setType(type);
